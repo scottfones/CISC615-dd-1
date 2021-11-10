@@ -23,3 +23,8 @@ class MyErrorHandler(ErrorHandler):
 
     def fatal(self, msg):
         self.errors.append(f"E:{self.location()}: {msg}")
+
+    def reset(self):
+        """Clear errors and warnings."""
+        self.errors = []
+        self.warnings = []

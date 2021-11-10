@@ -18,12 +18,12 @@ does not mean feeding data to the application after a fatal error
 """
 
 usage = \
-    """        
+    """
     Usage:
-    
+
       xpcmd.py [options] [urltodoc]
-    
-      ---Options:  
+
+      ---Options:
       -l language: ISO 3166 language code for language to use in error messages
       -o format:   Format to output parsed XML. 'e': ESIS, 'x': canonical XML
                    and 'n': normalized XML. No data will be output if this
@@ -85,7 +85,7 @@ for option in options:
 
 # Acting on option settings
 
-err = MyErrorHandler(p, warnings, entstack, rawxml)
+err = MyErrorHandler(p, warnings)
 p.set_error_handler(err)
 
 if namespaces:
@@ -103,7 +103,7 @@ if len(sysids) == 0:
 if extsub:
     p.set_read_external_subset(extsub)
 
-# --- Starting parse    
+# --- Starting parse
 
 print("xmlproc version %s" % xmlproc.version)
 
@@ -112,10 +112,10 @@ for sysid in sysids:
     print("Parsing '%s'" % sysid)
     p.set_data_after_wf_error(0)
     p.parse_resource(sysid)
-    print("Parse complete, %d error(s)" % err.errors)
+    print(f"Parse complete, {len(err.errors)} error(s)")
 
     if warnings:
-        print("and %d warning(s)" % err.warnings)
+        print(f"and {len(err.warnings)} warning(s)")
     else:
         print()
 

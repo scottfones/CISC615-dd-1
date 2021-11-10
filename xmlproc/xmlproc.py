@@ -385,6 +385,7 @@ class XMLProcessor(XMLCommonParser):
 
     def parse_charref(self):
         """Parses a character reference."""
+        digs = 0
         if self.now_at("x"):
             digts = unhex(self.get_match(reg_hex_digits))
         else:

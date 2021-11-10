@@ -124,15 +124,9 @@ class EntityParser:
         **WARNING**: This method does not call the parseStart/parseEnd methods,
         since it does not know if it may be called several times. Use
         parse_resource if you just want to read a file."""
-        while 1:
-            buf = fileobj.read(bufsize)
-            if buf == "":
-                break
-
-            try:
-                self.feed(buf)
-            except OutOfDataException as e:
-                break
+        with open(fileobj) as f:
+            buf = f.read(bufsize)
+            self.feed(buf)
 
     def reset(self):
         """Resets the parser, losing all unprocessed data."""
